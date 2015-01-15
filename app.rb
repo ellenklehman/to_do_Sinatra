@@ -15,7 +15,7 @@ end
 
 post("/lists") do
   name = params.fetch("name")
-  list = List.new(name)
+  list = List.new(:name => name, :id => nil)
   list.save()
   @lists = List.all()
   erb(:index)
@@ -29,7 +29,7 @@ end
 post("/tasks") do
   description = params.fetch("description")
   list_id = params.fetch("list_id").to_i()
-  task = Task.new(description, list_id)
+  task = Task.new(:description => description, :list_id => list_id)
   task.save()
   @list = List.find(list_id)
   erb(:list)

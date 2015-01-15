@@ -1,17 +1,5 @@
 <h1>To Do</h1>
 
-<p>Click on a list to see its tasks:</p>
-
-<ul>
-  <% if @lists.any?() %>
-    <% @lists.each do |list| %>
-      <li><a href="/lists/<%= list.id() %>"><%= list.name() %></a></li>
-    <% end %>
-  <% else %>
-    <p>There are no lists yet!</p>
-  <% end %>
-</ul>
-
 <p>Create a new list:</p>
 
 <form action="/lists" method="post">
@@ -20,3 +8,16 @@
 
   <button type="submit">Add list</button>
 </form>
+
+
+<% if @lists.any?() %>
+  <p>Click on a list to see its tasks:</p>
+
+  <ul>
+    <% @lists.each do |list| %>
+      <li><a href="/lists/<%= list.id() %>"><%= list.name() %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no lists yet!</p>
+<% end %>
