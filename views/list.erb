@@ -9,16 +9,16 @@
   <button type="submit">Add task</button>
 </form>
 
-<h3>Here are all the tasks in this list:</h3>
-
-<ul>
-  <% if @list.tasks().any?() %>
+<% if @list.tasks().any?() %>
+  <h3>Here are all the tasks in this list:</h3>
+  
+  <ul>
     <% @list.tasks().each() do |task| %>
       <li><%= task.description() %></li>
     <% end %>
-  <% else %>
-    <li>There are no tasks yet!</li>
-  <% end %>
-</ul>
+  </ul>
+<% else %>
+  <p>There are no tasks yet!</p>
+<% end %>
 
-<<a href="/">Return to Main Page</a>
+<a href="/">Return to Main Page</a>
