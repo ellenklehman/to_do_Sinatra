@@ -1,15 +1,9 @@
 class Task
+  attr_reader(:description, :list_id)
+
   define_method(:initialize) do |attributes|
     @description = attributes.fetch(:description)
     @list_id = attributes.fetch(:list_id)
-  end
-
-  define_method(:description) do
-    @description
-  end
-
-  define_method(:list_id) do
-    @list_id
   end
 
   define_singleton_method(:all) do
