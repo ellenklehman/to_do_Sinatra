@@ -11,7 +11,7 @@
 
 <% if @list.tasks().any?() %>
   <h3>Here are all the tasks in this list:</h3>
-  
+
   <ul>
     <% @list.tasks().each() do |task| %>
       <li><%= task.description() %></li>
@@ -21,4 +21,8 @@
   <p>There are no tasks yet!</p>
 <% end %>
 
+
+<a href="/lists/<%= @list.id() %>/edit">Update this list's name</a>
+
+<br>
 <a href="/">Return to Main Page</a>
