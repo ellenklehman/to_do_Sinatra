@@ -1,19 +1,18 @@
 <h1>To Do</h1>
 
-<form action="/lists" method="post">
-  <label for="name">Create a new list:</label>
-  <input id="name" name="name" type="text">
+<%= erb(:errors, :locals => { :object => @list }) %>
 
-  <button type="submit">Add list</button>
+<form action="/lists" method="post">
+  <%= erb :form %>
 </form>
 
 
-<% if @lists.any?() %>
+<% if @lists.any? %>
   <h4>Click on a list to see its tasks:</h4>
 
   <ul>
     <% @lists.each do |list| %>
-      <li><a href="/lists/<%= list.id() %>"><%= list.name() %></a> (<a href="/lists/<%= list.id() %>/edit">Update</a>)</li>
+      <li><a href="/lists/<%= list.id %>"><%= list.name %></a> (<a href="/lists/<%= list.id %>/edit">Update</a>)</li>
     <% end %>
   </ul>
 <% else %>

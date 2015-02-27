@@ -1,48 +1,59 @@
-require("bundler/setup")
+require 'bundler/setup'
 Bundler.require(:default)
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
 
-get("/") do
-  @lists = List.all()
-  erb(:index)
+get '/' do
+  @lists = List.all
+  @list = List.new
+  erb :index
 end
 
-post("/lists") do
-  name = params.fetch("name")
-  list = List.create({:name => name, :id => nil})
-  @lists = List.all()
-  erb(:index)
+post '/lists' do
+  @lists = List.all
+  name = params["name"]
+  @list = List.new(name: name, id: nil)
+  if @list.save
+    redirect "/lists/#{@list.id}"
+  else
+    erb :index
+  end
 end
 
-get("/lists/:id") do
-  @list = List.find(params.fetch("id").to_i())
-  erb(:list)
+get '/lists/:id' do
+  @list = List.find(params["id"].to_i)
+  erb :list
 end
 
-post("/tasks") do
-  description = params.fetch("description")
-  list_id = params.fetch("list_id").to_i()
-  task = Task.create({:description => description, :list_id => list_id})
+post '/tasks' do
+  description = params["description"]
+  list_id = params["list_id"].to_i
+  task = Task.create(description: description, list_id: list_id)
   @list = List.find(list_id)
-  erb(:list)
+  erb :list
 end
 
-get("/lists/:id/edit") do
-  @list = List.find(params.fetch("id").to_i())
-  erb(:list_edit)
+get '/lists/:id/edit' do
+  @list = List.find(params["id"].to_i)
+  erb :list_edit
 end
 
-patch("/lists/:id") do
-  name = params.fetch("name")
-  @list = List.find(params.fetch("id").to_i())
-  @list.update({:name => name})
-  erb(:list)
+patch '/lists/:id' do
+  name = params["name"]
+  @list = List.find(params["id"].to_i)
+  if @list.update(name: name)
+    redirect "/"
+  else
+    erb :list
+  end
 end
 
-delete("/lists/:id") do
-  @list = List.find(params.fetch("id").to_i())
-  @list.delete()
-  @lists = List.all()
-  erb(:index)
+delete '/lists/:id' do
+  @lists = List.all
+  @list = List.find(params["id"].to_i)
+  if @list.destroy
+    redirect "/"
+  else
+    erb :index
+  end
 end
