@@ -1,9 +1,7 @@
 <h1>To Do</h1>
 
-<p>Create a new list:</p>
-
 <form action="/lists" method="post">
-  <label for="name">Assign a name to your list:</label>
+  <label for="name">Create a new list:</label>
   <input id="name" name="name" type="text">
 
   <button type="submit">Add list</button>
@@ -11,11 +9,11 @@
 
 
 <% if @lists.any?() %>
-  <p>Click on a list to see its tasks:</p>
+  <h4>Click on a list to see its tasks:</h4>
 
   <ul>
     <% @lists.each do |list| %>
-      <li><a href="/lists/<%= list.id() %>"><%= list.name() %></a></li>
+      <li><a href="/lists/<%= list.id() %>"><%= list.name() %></a> (<a href="/lists/<%= list.id() %>/edit">Update</a>)</li>
     <% end %>
   </ul>
 <% else %>

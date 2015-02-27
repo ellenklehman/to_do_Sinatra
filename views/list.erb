@@ -1,4 +1,4 @@
-<h1>Add a task to <%= @list.name() %> </h1>
+<h2>Add a task to:  <%= @list.name() %> list </h2>
 
 <form action="/tasks" method="post">
   <input id="list_id" name="list_id" type="hidden" value="<%= @list.id() %>">
@@ -22,7 +22,11 @@
 <% end %>
 
 
-<a href="/lists/<%= @list.id() %>/edit">Update this list's name</a>
+<p>
+  <a href="/lists/<%= @list.id() %>/edit">Update this list's name</a>
+</p>
 
-<br>
-<a href="/">Return to Main Page</a>
+
+<p>
+  <a href="/">Return to Main Page</a>
+</p>
